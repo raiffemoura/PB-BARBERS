@@ -1,4 +1,4 @@
-import { SearchIcon } from "lucide-react"
+import { EyeIcon, FootprintsIcon, SearchIcon } from "lucide-react"
 import Header from "./_components/ui/header"
 import { Input } from "./_components/ui/input"
 import { Button } from "./_components/ui/button"
@@ -11,6 +11,11 @@ import BarbershopItem from "./_components/barbershop-item"
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({})
+  const popularBarbershops = await db.barbershop.findMany({
+    orderBy: {
+      name: "desc",
+    },
+  })
   return (
     <>
       <Header />
@@ -26,6 +31,37 @@ const Home = async () => {
             <SearchIcon></SearchIcon>
           </Button>
         </div>
+        {/* BUSCA RAPIDA */}
+        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar-thumb]:hidden [&::-webkit-scrollbar]:hidden">
+          <Button className="gap-2" variant="secondary">
+            <Image src="/cabelo.svg" alt="Cabelo" width={16} height={16} />
+            Cabelo
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <Image src="/barba.svg" alt="Barba" width={16} height={16} />
+            Barba
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/acabamento.svg"
+              alt="Acabamento"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <FootprintsIcon size={16} /> Pezinho
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <EyeIcon size={16} /> Sobrancelha
+          </Button>
+        </div>
+
         {/* IMAGEM */}
         <div className="relative mt-6 h-[150px] w-full">
           <Image
@@ -61,7 +97,7 @@ const Home = async () => {
             </div>
           </CardContent>
         </Card>
-
+        {/* RECOMENDADOS */}
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
           Recomendados
         </h2>
@@ -70,7 +106,26 @@ const Home = async () => {
             <BarbershopItem barbershop={barbershop} key={barbershop.id} />
           ))}
         </div>
+        {/* POPULARES */}
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Populares
+        </h2>
+        <div className="[&::-webkit-scrollbar-track] flex gap-4 overflow-auto [&::-webkit-scrollbar-thumb]:hidden [&::-webkit-scrollbar]:hidden">
+          {popularBarbershops.map((barbershop) => (
+            <BarbershopItem barbershop={barbershop} key={barbershop.id} />
+          ))}
+        </div>
       </div>
+      {/* FOOTER */}
+      <footer>
+        <Card className="px-5 py-6">
+          <CardContent>
+            <p className="text-sm text-gray-400">
+              © 2024 Copyright <span className="font-bold"> PB Barbers</span>
+            </p>
+          </CardContent>
+        </Card>
+      </footer>
     </>
   )
 }
