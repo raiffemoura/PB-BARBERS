@@ -28,7 +28,7 @@ const Home = async () => {
         <div className="mt-6 flex items-center gap-2">
           <Input placeholder="Faça sua busca..."></Input>
           <Button>
-            <SearchIcon></SearchIcon>
+            <SearchIcon />
           </Button>
         </div>
         {/* BUSCA RAPIDA */}
