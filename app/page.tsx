@@ -15,11 +15,13 @@ const Home = async () => {
       name: "desc",
     },
   })
+
   return (
     <>
       <Header />
       <div className="p-5">
         {/* TEXTO */}
+
         <h2 className="text-xl font-bold">Olá, Raiffe!</h2>
         <p>Domingo, 11 de agosto </p>
         {/* BUSCA */}
@@ -38,9 +40,9 @@ const Home = async () => {
               <Link href={`/barbershops?services=${option.title}`}>
                 <Image
                   src={option.imageUrl}
-                  alt={option.title}
                   width={16}
                   height={16}
+                  alt={option.title}
                 />
                 {option.title}
               </Link>
