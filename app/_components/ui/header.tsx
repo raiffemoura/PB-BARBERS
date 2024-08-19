@@ -3,6 +3,7 @@ import { Card, CardContent } from "./card"
 import { MenuIcon } from "lucide-react"
 import { Button } from "./button"
 import { Sheet, SheetTrigger } from "./sheet"
+import logo from "@/public/logo.png"
 
 import SidebarSheet from "../sidebar-sheet"
 import Link from "next/link"
@@ -12,7 +13,7 @@ const Header = () => {
     <Card>
       <CardContent className="flex flex-row items-center justify-between p-5">
         <Link href="/">
-          <Image src="/logo.png" alt="PB Barbers" width={120} height={18} />
+          <Image src={logo} alt="PB Barbers" width={120} height={18} />
         </Link>
         <Sheet>
           <SheetTrigger asChild>
