@@ -21,7 +21,7 @@ const SignInDialog = () => {
         onClick={handleLoginWithGoogleClick}
       >
         <Image
-          src={"/Google.svg"}
+          src={"/google.svg"}
           alt="Fazer login com o Google"
           width={18}
           height={18}
