@@ -23,6 +23,7 @@ import SignInDialog from "./sign-in-dialog"
 import { Dialog } from "@radix-ui/react-dialog"
 import { DialogContent } from "./ui/dialog"
 import BookingSummary from "./booking-summary"
+import { useRouter } from "next/navigation"
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -70,6 +71,9 @@ const getTimeList = ({ bookings, selectedDay }: GetTimeListProps) => {
   })
 }
 const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
+  const { data } = useSession()
+  const router = useRouter()
+
   const [signInDialogIsOpen, setSignInDialogIsOpen] = useState(false)
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(undefined)
   const [selectedTime, setSelectedTime] = useState<string | undefined>(
@@ -123,7 +127,6 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDay(date)
   }
-  const { data } = useSession()
 
   const handleCreateBooking = async () => {
     try {
@@ -136,7 +139,12 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
         date: selectedDate,
       })
       handleBookingsSheetOpenChange()
-      toast.success("Agendamento criado com sucesso!")
+      toast.success("Agendamento criado com sucesso!", {
+        action: {
+          label: "Ver agendamentos",
+          onClick: () => router.push("/bookings"),
+        },
+      })
     } catch (error) {
       console.log(error)
       toast.error("Erro ao criar o agendamento")
