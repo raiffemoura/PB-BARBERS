@@ -45,5 +45,6 @@
   }
   body {
     @apply h-full bg-background text-foreground;
+    @apply mx-auto max-w-screen-xl;
   }
 }
